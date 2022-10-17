@@ -21,6 +21,7 @@ session_start();
         if (mysqli_connect_errno()) {
             die("Connection failed: " . mysqli_connect_error());
         }
+        //Declaramos las variables
         $codigo =  intval($_POST['codigo']);
         $nombre =  $_POST['nombre'];
         $descripcion =  $_POST['descripcion'];
@@ -29,21 +30,25 @@ session_start();
         $fecha_final =  $_POST['fecha_final'];
         $DNI_profesor =  $_POST['DNI_profesor'];
 
-        $sql = "INSERT INTO cursos VALUES ($codigo, '$nombre', '$descripcion', $hora_total, '$fecha_inicio', '$fecha_final', '$DNI_profesor')";
+        //Insertamos los datos en la bbdd
+        $sql = "INSERT INTO cursos VALUES ($codigo, '$nombre', '$descripcion', $hora_total, '$fecha_inicio', '$fecha_final', '$DNI_profesor', 1)";
         $result = mysqli_query($conn, $sql);
+        var_dump($sql);
     } else {
     ?>
         <div class="center-contenedor-login">
             <div class="contenedor-login">
                 <h2 class="login-header">Añadir cursos</h2>
                 <form action="añadir_curso.php" class="login" method="POST">
-                    Codigo: <input type="text" required="required" name="codigo" /><br></br>
-                    Nombre: <input type="text" required="required" name="nombre" /><br></br>
-                    Descripción: <input type="name" required="required" name="descripcion" /><br></br>
-                    Horas Totales: <input type="name" required="required" name="hora_total" /><br></br>
-                    Fecha Inicio: <input type="date" required="required" name="fecha_inicio"><br></br>
-                    Fecha Fin: <input type="date" required="required" name="fecha_final" /><br></br>
-                    DNI Profesor: <input type="text" required="required" name="DNI_profesor" /><br></br>
+                    Codigo: <input type="text" required="required" name="codigo" />
+                    Nombre: <input type="text" required="required" name="nombre" />
+                    Descripción: <input type="name" required="required" name="descripcion" />
+                    Horas Totales: <input type="name" required="required" name="hora_total" />
+                    Fecha inicio:<input type="date" name="fecha_inicio" id="fecha" required min=<?php $hoy = date("Y-m-d");
+                                                                                                echo $hoy; ?> />
+                    Fecha final:<input type="date" name="fecha_final" id="fecha" required min=<?php $hoy = date("Y-m-d");
+                                                                                                echo $hoy; ?> />
+                    DNI Profesor: <input type="text" required="required" name="DNI_profesor" />
                     <p><input type="submit" name="enviar" value="Aceptar" /></p>
                     </a>
                 </form>

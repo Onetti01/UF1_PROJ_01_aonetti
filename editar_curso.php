@@ -21,6 +21,7 @@ session_start();
             if ($bddcon == false) {
                 mysqli_connect_error();
             } else {
+                //Declaramos las variables
                 $codigo = $_POST['codigo'];
                 $nombre = $_POST['nombre'];
                 $descripcion = $_POST['descripcion'];
@@ -29,7 +30,7 @@ session_start();
                 $fecha_final = $_POST['fecha_final'];
                 $dni_profesor = $_POST['DNI_profesor'];
 
-
+                //Actualizamos los datos en la bbdd
                 $sql = "UPDATE cursos SET nombre='$nombre', descripcion='$descripcion', hora_total='$hora_total', fecha_inicio='$fecha_inicio', fecha_final='$fecha_final', dni_profesor='$dni_profesor' WHERE codigo LIKE '$codigo'";
                 $consulta = mysqli_query($bddcon, $sql);
 
@@ -68,9 +69,9 @@ session_start();
                                     Horas Totales: <input type="name" required="required" name="hora_total" name="codigo" value="<?php echo $curso['hora_total'] ?>" /><br></br>
                                     Fecha Inicio: <input type="date" required="required" name="fecha_inicio" name="codigo" value="<?php echo $curso['fecha_inicio'] ?>" /><br></br>
                                     Fecha Fin: <input type="date" required="required" name="fecha_final" name="codigo" value="<?php echo $curso['fecha_final'] ?>" /><br></br>
-                                    DNI Profesor: <input type="text" required="required" name="DNI_profesor"name="codigo" value="<?php echo $curso['DNI_profesor'] ?>" /><br></br>
+                                    DNI Profesor: <input type="text" required="required" name="DNI_profesor" name="codigo" value="<?php echo $curso['DNI_profesor'] ?>" /><br></br>
                                     <p><button type='submit'>Modificar</button></p>
-                                    
+
                                     </a>
                                 </form>
                             </div>

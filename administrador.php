@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-
 if ($_POST) {
 
     //Variable con los datos de conexión
@@ -19,13 +17,13 @@ if ($_POST) {
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
-    if ( $count == 1 ) {
+    if ($count == 1) {
         //Variable de sessión
-        // $_SESSION['usuario'] = $_POST['usuario']; // Por si el admin tiene que editar algo como usuario
         $_SESSION['administrador'] = $_POST['usuario'];
     } else {
         //Control del login
         echo "El usuario o la password no se han introducido correctamente";
+        header("Refresh:2; url=login.php");
     }
 }
 
@@ -44,15 +42,17 @@ if (isset($_SESSION['administrador'])) {
         <link rel="stylesheet" href="style.css">
         <title>administración</title>
     </head>
+    <aside>
+        <h3>Panel administratrivo</h3>
+        <ul type="lista">
+            <li><a class="boton-admin" href="gestion_profesor.php">Gestión Professor</a></li>
+            <li><a class="boton-admin" href="gestion_curso.php">Gestión Cursos</a></li>
+            <a href="die.php">Cerrar session</a></div>
+
+        </ul>
+    </aside>
 
     <body>
-
-        <div id="titulo-admin">
-            <h2>Panel administrativo</h2>
-        </div>
-        <a class="boton-personalizado" href="gestion_profesor.php">Gestión Professor</a>
-        <a class="boton-personalizado" href="gestion_curso.php">Gestión Cursos</a>
-        <a class="boton-personalizado" href="login.php">Volver al login</a>
 
     </body>
 

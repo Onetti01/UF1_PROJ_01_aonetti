@@ -1,8 +1,9 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,58 +11,72 @@
     <link rel="stylesheet" href="style.css">
     <title>INFO BDN</title>
 </head>
+
 <body>
     <?php
 
-        if($_POST){
-            
-            $conn = new mysqli('localhost', 'root','', 'info_bdn');
-            if ($conn->connect_error) {
-                die("Connection failed: " 
-                    . $conn->connect_error);
-            }
+    if ($_POST) {
 
-            $email =  $_REQUEST['email'];
-            $password =  $_REQUEST['password'];
-            $nom =  $_REQUEST['nom'];
-            $sql = "INSERT INTO usuarios VALUES ('$email','$password','$nom')";
+        $conn = new mysqli('localhost', 'root', '', 'info_bdn');
+        if ($conn->connect_error) {
+            die("Connection failed: "
+                . $conn->connect_error);
+        }
+        //Declaramos las variables
+        $email =  $_REQUEST['email'];
+        $password = md5($_REQUEST['password']);
+        $nombre =  $_REQUEST['nombre'];
+        $apellidos =  $_REQUEST['apellidos'];
+        $edad =  intval($_REQUEST['edad']);
+        $dni =  $_REQUEST['dni'];
+        $ruta_imagen = "";
 
-            $result = mysqli_query($conn, $sql);
+        if (($_FILES['foto']['name'] != "")) {
+            $target_dir = "img_alumnos/";
+            $file = $_FILES['foto']['name'];
+            $path = pathinfo($file);
+            $filename = $email; # Esta linia pone el nombre final al archivo
+            $ext = $path['extension'];
+            $temp_name = $_FILES['foto']['tmp_name'];
+            $ruta_imagen = $target_dir . $filename . "." . $ext;
 
-            //Comprobación si los cursos coinciden
-            if($curso == $practicar){
-                echo "<h3>Ya no estan disponibles estos cursos. ";
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='1.5;URL=registrar.php'>";  
-    
-            }else if($result){
-                echo "<h3>Se ha registrado correctamente.";
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='1.5;URL=login.php'>";  
-            }
-            else{
-                echo "Error. $sql. " . mysqli_error($conn);
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='2;URL=registrar.php'>";  
+
+            if (file_exists($ruta_imagen)) {
+                echo "Añadido correctamente.";
+            } else {
+                move_uploaded_file($temp_name, $ruta_imagen);
+                echo "Has subido la foto correctamente.";
             }
         }
-        else{ 
-            //Se carga el  formulario
-        ?>
 
+        //Insertamos los datos
+        $sql = "INSERT INTO alumnos (email, password, nombre, apellidos, edad, dni,fotografia)
+                VALUES ('$email','$password','$nombre','$apellidos', $edad,'$dni','$ruta_imagen')";
+        $result = mysqli_query($conn, $sql);
+    } else {
+        //Se carga el  formulario
+    ?>
         <div class="center-contenedor-login">
             <div class="contenedor-login">
-            <h2 class="login-header">Registrate en nuestra academia INFO BDN</h2>
-                <form action="administrador.php" class="login" method="POST">
-                Cuenta de mail: <input type="mail" required="required" name="email"/><br></br>
-                Password: <input type="password" required="required" name="password"><br></br>
-                Nombre: <input type="text" required="required" name="nom"/><br></br>
-                <p><input type="submit" name="enviar" value="Aceptar"/></p>
-            <a href="login.php">volver al login</a>
-            </a>
-                </form> 
-                </div>
+                <h2 class="login-header">Registrate en nuestra academia INFO BDN</h2>
+                <form action="registrar.php" class="login" method="POST" enctype="multipart/form-data">
+                    <input type="text" required="required" name="email" placeholder="Cuenta Mail" />
+                    <input type="password" required="required" name="password" placeholder="Password" />
+                    <input type="text" required="required" name="nombre" placeholder="Nombre" />
+                    <input type="text" required="required" name="apellidos" placeholder="Apellidos" />
+                    <input type="text" required="required" name="dni" placeholder="DNI" />
+                    <input type="text" required="required" name="edad" placeholder="Edad" />
+                    Añade una foto:<input type="file" name="foto" />
+                    <button type="submit" class="btn">Aceptar</button>
+                    <a href="login.php" class="btn">volver al login</a>
+                    </a>
+                </form>
             </div>
         </div>
-        <?php 
-         } 
-         ?>
+        </div>
+    <?php
+    }
+    ?>
 </body>
+
 </html>

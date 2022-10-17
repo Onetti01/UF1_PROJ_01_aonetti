@@ -1,3 +1,7 @@
+* {
+    font-family: Arial;
+}
+
 /*Login principal*/
 
 .center-contenedor-login {
@@ -8,37 +12,88 @@
     justify-content: center;
 }
 
+/*
+div.contenedor-login-img {
+  width: 75%;
+  height: 100%  ;
+  background-image: url(./login_imagen.jpg);
+  background-repeat: no-repeat;
+  background-position: 30% center;
+
+}
+*/
+
 div.contenedor-login {
+    margin: 0 25px;
     width: 25%;
-    height: 25;
     border-radius: 20px;
     border-width: 6px;
     border-style: outset;
     align-items: center;
+    text-align: center;
+}
+img.login_logo {
+    width: 50px;
+    height: 50px;
+    padding: 5%;
+}
+
+input {
+    display: block;
+    margin: auto auto;
+    width: 100%;
+    margin-bottom: 2em;
+    padding: 0.5em 0;
+    border: none;
+    background: rgb(209, 204, 206);
+    color: #757575;
+    border: none;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    border: 1px solid darken;
+    padding: 0.5em 2em;
+    color: rgb(167, 167, 167);
+    margin-right: 0.5em;
+    box-shadow: inset 0px 1px 0px;
 }
 
 body {
+    min-height: 500px;
+    height: 100vh;
     margin: 0px;
-    background: rgb(238,174,202);
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);;
+    background: rgb(209, 204, 206);
 }
 
-/* Barra de naveción */
+.container-gestion {
+    display: grid;
+    grid-template-columns: 175px 1fr;
+    grid-template-rows: 50px 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "Nav Menu"
+        "Nav Table";
+}
+
+/* Barra de navegación */
 .navbar {
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    background: rgb(58,163,219);
-    background: linear-gradient(90deg, rgba(58,163,219,1) 27%, rgba(0,204,255,1) 47%);
-    color: black;
+    padding: 20px;
+    background: rgb(4, 25, 37);
+    color: rgb(255, 255, 255);
 }
 .nav-links a {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 /* LOGO */
 .logo {
-    font-size: 30px;
+    width: 50x;
+    height: 50px;
 }
 /* NAVBAR MENU */
 .menu {
@@ -50,93 +105,130 @@ body {
 .menu li {
     padding: 5px 14px;
 }
- 
+
 /* Footer */
 
-.footer {
+footer {
+    padding: 5px;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background: rgb(58,163,219);
-    background: linear-gradient(90deg, rgba(58,163,219,1) 27%, rgba(0,204,255,1) 47%);
-    color: black;
+    background: rgb(4, 25, 37);
     text-align: center;
- }
-
+}
 
 /*Administración*/
+aside {
+    grid-area: Nav;
+    background-color: rgb(4, 25, 37);
+    color: white;
+    overflow: hidden;
+    padding: 1%;
+    height: 100%;
+    width: max-content;
+    display: inline-block;
+}
 
-#titulo-admin{
+#titulo-admin {
     text-align: center;
 }
 
 a {
     text-decoration: none;
-  }
+}
 
 .boton-personalizado {
     border-radius: 10px;
     border-width: 3px;
     border-style: outset;
-    border-color:#2336e7;
+    border-color: #2336e7;
     align-items: center;
     width: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
-    
-    }
+}
 
-    .boton-personalizado:hover {
-        background-color:#c0ffff;
-        }
+.b_menu {
+    color: #ffffff;
+    border-top: rgb(4, 25, 37);
+    border-right: rgb(4, 25, 37);
+    border-bottom: blue 2px solid;
+    border-left: rgb(4, 25, 37);
+    border-color: #2336e7;
+    align-items: center;
+    width: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.b_menu:hover {
+    color: black;
+    background-color: rgb(58, 163, 219);
+}
 
 h2 {
     font-size: 30px;
 }
 
 /*Gestión*/
+.centrar-tabla {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .content-table {
-    position: absolute;
-    left: 30%;
-    top: 30%;
     border-collapse: collapse;
     font-size: 1.2em;
     border-radius: 5px 5px 0 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     text-align: center;
-  }
-  .imagen_tabla{
+}
+.imagen_tabla {
     max-width: 150px;
     max-height: 150px;
     min-width: 100px;
     min-height: auto;
     margin: 0;
     padding: 0;
+}
 
-  }
-  
-  .content-table thead tr {
-    background-color: rgb(58,163,219);
+.content-table thead tr {
+    background-color: rgb(58, 163, 219);
     color: #ffffff;
     text-align: center;
-   
-  }
-  
-  .content-table th,
-  .content-table td {
+}
+
+.content-table th,
+.content-table td {
     padding: 12px 15px;
-  }
-  
-  .content-table tbody tr {
+}
+
+.content-table tbody tr {
     border-bottom: 1px solid #dddddd;
-  }
-  
-  .content-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-  }
+}
 
+/* .content-table tbody tr:nth-of-type(even) {
+    background-color: #000000;
+} */
 
+.menu-gestion {
+    grid-area: Menu;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.tabla {
+    grid-area: Table;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
