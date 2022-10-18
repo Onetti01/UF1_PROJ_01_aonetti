@@ -1,0 +1,11 @@
+Login admin:
+Usuario:admin
+Password: admin123
+
+Login Profesor:
+DNI:56781534A
+Password: asd
+
+Login alumno:
+Usuario: albertonetti@gmail.com
+Password: asd
